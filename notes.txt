@@ -1,0 +1,52 @@
+Download SnowSQL CLI from this website
+https://developers.snowflake.com/snowsql/
+
+Update the config file at ~/.snowsql/config with accountname, username, password
+
+To connect to snowflake using snowsql cli use the command in your terminal:
+`snowsql -c example`
+
+Run the 01_setup_snowflake.sql to create warehouse, db and roles
+
+Create a conda environment by running
+`conda env create -f environment.yml`
+
+Activate the conda environment
+`conda activate snowflake-demo`
+
+Edit the config file at .devcontainer/config to point to correct snowflake details, refer the newly created warehouse, schema and db
+
+Add the absolute path to this .devcontainer/config file in utils/snowpark_utils.py
+
+Run the 02_load_raw.py file to create RAW_POS and RAW_CUSTOMER schema tables from infered parquet files in s3
+
+Use the below website to 'Get' the free dataset into your snowflake account
+https://app.snowflake.com/cinykaj/amk_aws/#/data/shared/SNOWFLAKE_DATA_MARKETPLACE/listing/GZSOZ1LLEL?originTab=databases&database=FROSTBYTE_WEATHERSOURCE
+
+Run the 03_load_weather.sql to check if the data is acessible from the 3rd party website
+
+Run the 04_create_pos_view.py to create a view that joins 6 tables in RAW_POS schema and constructs stream over that view
+
+Edit the app.toml file in 05_fahrenheit_to_celsius_udf/ to point to the .devcontainer/config file
+This file has all the config parameters relating to the UDF
+
+cd to 05_fahrenheit_to_celsius_udf/
+
+Run below code to deploy the code to snowflake
+`snow function create`
+
+Run the steps/05_fahrenheit_to_celsius_udf/app.py to create a UDF in Snowflake
+
+Edit the app.toml file in 06_orders_update_sp/ to point to the .devcontainer/config file
+This file has all the config parameters relating to the SProc
+
+cd to 06_orders_update_spc/
+
+Run below code to deploy the code to snowflake
+`snow procedure create`
+
+
+
+
+
+
